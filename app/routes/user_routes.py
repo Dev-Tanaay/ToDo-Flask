@@ -2,8 +2,6 @@ from flask import Blueprint , request
 from app.services import signup_user,login_user
 user = Blueprint("user",__name__)
 
-from flask import jsonify
-
 @user.route("/signup", methods=["POST"])
 def signup():
     data = request.get_json()
