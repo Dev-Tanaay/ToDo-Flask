@@ -1,8 +1,19 @@
-from flask import Blueprint
-from app.services import list_users
+from flask import Blueprint , request
+from app.services import signup_user,login_user
 user = Blueprint("user",__name__)
 
-@user.route("/user")
-def get_user():
-    return list_users()
+from flask import jsonify
+
+@user.route("/signup", methods=["POST"])
+def signup():
+    data = request.get_json()
+    response = signup_user(data)
+    return response
+
+@user.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    response = login_user(data)
+    return response
+
 

@@ -1,6 +1,7 @@
 from flask import Flask
 from app.config import DevelopmentConfig
 from app.routes import user
+from .extensions import db,migrate
 
 def create_app(config_class=None):
     app = Flask(__name__)
@@ -8,5 +9,9 @@ def create_app(config_class=None):
         config_class = DevelopmentConfig
     app.config.from_object(config_class)
 
-    app.register_blueprint(user,url_prefix="/api")
+    db.init_app(app)
+    migrate.init_app(app, db)
+    
+    app.register_blueprint(user,url_prefix="/api/user")
+
     return app
