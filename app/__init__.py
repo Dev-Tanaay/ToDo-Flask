@@ -1,4 +1,7 @@
 from flask import Flask
+from dotenv import load_dotenv
+load_dotenv()
+
 from app.config import DevelopmentConfig
 from app.routes import user,todo
 from app import models
